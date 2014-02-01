@@ -5,15 +5,24 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import com.avaje.ebean.annotation.CreatedTimestamp;
+
+import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 @Entity
 public class Message extends Model {
 	@Id
 	public Long id;
+	
+	@Required
 	public String name;
 	public String mail;
+	
+	@Required
 	public String message;
+	
+	@CreatedTimestamp
 	public Date postdate;
 	
 	public static Finder<Long, Message> find =

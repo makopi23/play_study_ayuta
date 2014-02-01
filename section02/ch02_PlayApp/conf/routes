@@ -10,3 +10,6 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 GET 	/add 						controllers.Application.add()
 POST 	/create 					controllers.Application.create()
+GET		/item						controllers.Application.setitem()
+POST	/edit						controllers.Application.edit()
+POST	/update						controllers.Application.update()

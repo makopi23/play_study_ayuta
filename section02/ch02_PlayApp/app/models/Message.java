@@ -15,4 +15,13 @@ public class Message extends Model {
 	public String mail;
 	public String message;
 	public Date postdate;
+	
+	public static Finder<Long, Message> find =
+			new Finder<Long, Message>(Long.class, Message.class);
+	
+	@Override
+	public String toString(){
+		return ("[id:" + id + ", name:" + name + ", mail:" + mail
+				+ ", message:" + message + ", date:" + postdate + "]");
+	}
 }

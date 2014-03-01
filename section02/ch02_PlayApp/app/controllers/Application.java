@@ -110,7 +110,7 @@ public class Application extends Controller {
         List<Message> datas = null;
         if(!f.hasErrors()){
             String input = f.get().input;
-            datas = Message.find.where().eq("name", input).findList();
+            datas = Message.find.where().like("name","%" + input + "%").findList();
         }
         return ok(find.render("投稿の検索", f, datas));
         

@@ -109,7 +109,8 @@ public class Application extends Controller {
         Form<FindForm> f = new Form(FindForm.class).bindFromRequest();
         List<Message> datas = null;
         if(!f.hasErrors()){
-            datas = Message.find.where().findList();
+            String input = f.get().input;
+            datas = Message.find.where().eq("name", input).findList();
         }
         return ok(find.render("投稿の検索", f, datas));
         

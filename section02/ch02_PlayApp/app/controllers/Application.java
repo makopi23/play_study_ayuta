@@ -40,6 +40,8 @@ public class Application extends Controller {
 		}                        
 	}
 	
+
+	
 	// /itemにアクセスした際のAction
 	public static Result setitem(){
 	    Form<Message> f = new Form(Message.class);
@@ -76,4 +78,40 @@ public class Application extends Controller {
 	        return ok(edit.render("ERROR:再入力してください。", f));
 	    }
 	}
+	
+	
+	// /delにアクセスした際のAction
+    public static Result delete(){
+        Form<Message> f = new Form(Message.class);
+        return ok(delete.render("削除するID番号", f));
+    }
+    
+    // /removeにアクセスした際のAction
+    public static Result remove(){
+        Form<Message> f = new Form(Message.class).bindFromRequest();
+        if(!f.hasErrors()){
+            Message obj = f.get();
+            Long id = obj.id;
+            obj = Message.find.byId(id);
+            if(obj != null){
+                obj.delete();
+                return redirect("/");
+            }else{
+                return ok(delete.render("ERROR:そのID番号は見つかりません。", f));
+            }
+        }else{
+            return ok(delete.render("ERROR:入力にエラーが起こりました。", f));
+        }
+    }
+    
+    // /findにアクセスした際のAction
+    public static Result find(){
+        Form<FindForm> f = new Form(FindForm.class).bindFromRequest();
+        List<Message> datas = null;
+        if(!f.hasErrors()){
+            datas = Message.find.where().findList();
+        }
+        return ok(find.render("投稿の検索", f, datas));
+        
+    }
 }
